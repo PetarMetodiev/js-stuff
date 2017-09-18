@@ -13,10 +13,13 @@ const curry = (
 const head = ([x]) => x;
 const tail = ([x, ...xs]) => xs;
 
+const factorial = (n, acc = 1) => n < 2 ? acc : factorial(n - 1, n * acc);
+
 module.exports = {
 	pipe
 	, compose
 	, curry
 	, head
 	, tail
+	, factorial
 };
