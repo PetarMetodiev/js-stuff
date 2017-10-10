@@ -12,7 +12,11 @@ const curry = (
 
 const head = ([x]) => x;
 const tail = ([, ...xs]) => xs;
+// https://medium.com/@caseymorrisus/functional-js-with-es6-recursive-patterns-b7d0813ef9e3
+const def = (x) => typeof x !== 'undefined';
+const undef = (x) => !def(x);
 const length = ([x, ...xs], len = 0) => x ? length(xs, len + 1) : len;
+const reverse = ([x, ...xs]) => def(x) ? [...reverse(xs), x] : [];
 
 const factorial = (n, acc = 1) => n < 2 ? acc : factorial(n - 1, n * acc);
 
@@ -22,6 +26,9 @@ module.exports = {
 	, curry
 	, head
 	, tail
+	, def
+	, undef
 	, length
+	, reverse
 	, factorial
 };
