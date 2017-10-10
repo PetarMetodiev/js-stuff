@@ -11,7 +11,8 @@ const curry = (
 	(a => a.length === f.length ? f(...a) : curry(f, a))([...arr, ...args]);
 
 const head = ([x]) => x;
-const tail = ([x, ...xs]) => xs;
+const tail = ([, ...xs]) => xs;
+const length = ([x, ...xs], len = 0) => x ? length(xs, len + 1) : len;
 
 const factorial = (n, acc = 1) => n < 2 ? acc : factorial(n - 1, n * acc);
 
@@ -21,5 +22,6 @@ module.exports = {
 	, curry
 	, head
 	, tail
+	, length
 	, factorial
 };
