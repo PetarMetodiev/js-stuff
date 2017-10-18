@@ -1,14 +1,13 @@
 const pipe = (...fns) => x => fns.reduce((y, f) => f(y), x);
 const compose = (...fns) => x => fns.reduceRight((y, f) => f(y), x);
 // https://github.com/learn-javascript-courses/es6-curry#add3-partially-applied--autocurried
-const curry = (
-	f
-	, arr = []
-) =>
-	(
-		...args
-	) =>
-	(a => a.length === f.length ? f(...a) : curry(f, a))([...arr, ...args]);
+// const curry = ( f , arr = []) =>
+//	( ...args) => (a => a.length === f.length ? f(...a) : curry(f, a))([...arr, ...args]);
+
+const curry = (fx, arity = 0) =>
+	(...args) => args.length >= (arity || fx.length)
+		? fx(...args)
+		: (...args2) => curry(fx, arity)(...[...args, ...args2]);
 
 const head = ([x]) => x;
 const tail = ([, ...xs]) => xs;
@@ -31,8 +30,8 @@ const first = ([x, ...xs], n = 1) => def(x) && n > 0
 
 const last = (xs, n = 1) => reverse(first(reverse(xs), n));
 
-const insertAt = ([x, ...xs], el, pos, curr = 0) => def(x)
-	? curr === pos ? [el, x, ...insertAt(xs, el, pos, curr + 1)] : [x, ...insertAt(xs, el, pos, curr + 1)]
+const insertAt = (pos, el, [x, ...xs], curr = 0) => def(x)
+	? curr === pos ? [el, x, ...insertAt(pos, el, xs, curr + 1)] : [x, ...insertAt(pos, el, xs, curr + 1)]
 	: curr <= pos ? [el] : []
 
 const isArray = (x) => Array.isArray(x);
