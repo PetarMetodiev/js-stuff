@@ -30,8 +30,8 @@ const first = ([x, ...xs], n = 1) => def(x) && n > 0
 
 const last = (xs, n = 1) => reverse(first(reverse(xs), n));
 
-const insertAt = (pos, el, [x, ...xs], curr = 0) => def(x)
-	? curr === pos ? [el, x, ...insertAt(pos, el, xs, curr + 1)] : [x, ...insertAt(pos, el, xs, curr + 1)]
+const insertAt = (pos, el, curr = 0, [x, ...xs]) => def(x)
+	? curr === pos ? [el, x, ...insertAt(pos, el, curr + 1, xs)] : [x, ...insertAt(pos, el, curr + 1, xs)]
 	: curr <= pos ? [el] : []
 
 const isArray = (x) => Array.isArray(x);
