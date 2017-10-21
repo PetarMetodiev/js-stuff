@@ -5,9 +5,9 @@ const compose = (...fns) => x => fns.reduceRight((y, f) => f(y), x);
 //	( ...args) => (a => a.length === f.length ? f(...a) : curry(f, a))([...arr, ...args]);
 
 const curry = (fx, arity = 0) =>
-	(...args) => args.length >= (arity || fx.length)
-		? fx(...args)
-		: (...args2) => curry(fx, arity)(...[...args, ...args2]);
+	(...args) => args.length >= (arity || fx.length) ?
+	fx(...args) :
+	(...args2) => curry(fx, arity)(...[...args, ...args2]);
 
 const head = ([x]) => x;
 const tail = ([, ...xs]) => xs;
@@ -16,33 +16,26 @@ const def = (x) => typeof x !== 'undefined';
 const undef = (x) => !def(x);
 const copy = (arr) => [...arr];
 
-const length = ([x, ...xs], len = 0) => x
-	? length(xs, len + 1)
-	: len;
+const length = (len = 0, [x, ...xs]) => x ?
+	length(len + 1, xs) :
+	len;
 
-const reverse = ([x, ...xs]) => def(x)
-	? [...reverse(xs), x]
-	: [];
+const reverse = ([x, ...xs]) => def(x) ? [...reverse(xs), x] : [];
 
-const first = ([x, ...xs], n = 1) => def(x) && n > 0
-	? [x, ...first(xs, n - 1)]
-	: [];
+const first = (n = 1, [x, ...xs]) => def(x) && n > 0 ? [x, ...first(n - 1, xs)] : [];
 
-const last = (xs, n = 1) => reverse(first(reverse(xs), n));
+const last = (n = 1, xs) => reverse(first(reverse(xs), n));
 
-const insertAt = (pos, el, curr = 0, [x, ...xs]) => def(x)
-	? curr === pos ? [el, x, ...insertAt(pos, el, curr + 1, xs)] : [x, ...insertAt(pos, el, curr + 1, xs)]
-	: curr <= pos ? [el] : []
+const insertAt = (pos, el, curr = 0, [x, ...xs]) => def(x) ?
+	curr === pos ? [el, x, ...insertAt(pos, el, curr + 1, xs)] : [x, ...insertAt(pos, el, curr + 1, xs)] :
+	curr <= pos ? [el] : []
 
 const isArray = (x) => Array.isArray(x);
 
-const flatten = ([x, ...xs]) => def(x)
-	? isArray(x) ? [...flatten(x), ...flatten(xs)] : [x, ...flatten(xs)]
-	: [];
+const flatten = ([x, ...xs]) => def(x) ?
+	isArray(x) ? [...flatten(x), ...flatten(xs)] : [x, ...flatten(xs)] : [];
 
-const map = (fn, [x, ...xs]) => def(x)
-	? [fn(x), ...map(fn, xs)]
-	: [];
+const map = (fn, [x, ...xs]) => def(x) ? [fn(x), ...map(fn, xs)] : [];
 
 const factorial = (n, acc = 1) => n < 2 ? acc : factorial(n - 1, n * acc);
 
