@@ -54,6 +54,8 @@ const filter = (fn, [x, ...xs]) => def(x) ?
 const reject = (fn, [x, ...xs]) => def(x) ?
 	!fn(x) ? [x, ...reject(fn, xs)] : [...reject(fn, xs)] : [];
 
+const partition = (fn, xs) => [filter(fn, xs), reject(fn, xs)];
+
 const factorial = (n, acc = 1) => n < 2 ? acc : factorial(n - 1, n * acc);
 
 const testArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -78,6 +80,7 @@ module.exports = {
 	, swap
 	, filter
 	, reject
+	, partition
 	, factorial
 	, testArr
 };
