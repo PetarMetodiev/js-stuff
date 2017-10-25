@@ -75,6 +75,7 @@ const reduceRight = (fn, acc, arr) => reduce(fn, acc, reverse(arr));
 // partial(add)(1)(2)(3) <-- ERROR
 const partial = (fn, ...args) => (...newArgs) => fn(...args, ...newArgs);
 
+// Convert array arguments to single value arguments.
 // Works only on recursive functions.
 const spreadArgs = (fn) => (...args) => fn(args);
 
