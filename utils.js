@@ -56,6 +56,9 @@ const reject = (fn, [x, ...xs]) => def(x) ?
 
 const partition = (fn, xs) => [filter(fn, xs), reject(fn, xs)];
 
+const reduce = ([x, ...xs], fn, start) => def(x) ?
+	reduce(xs, fn, fn(x, start)) : start;
+
 const factorial = (n, acc = 1) => n < 2 ? acc : factorial(n - 1, n * acc);
 
 const testArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -81,6 +84,7 @@ module.exports = {
 	, filter
 	, reject
 	, partition
+	, reduce
 	, factorial
 	, testArr
 };
