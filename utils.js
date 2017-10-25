@@ -58,8 +58,10 @@ const reject = (fn, [x, ...xs]) => def(x) ?
 
 const partition = (fn, xs) => [filter(fn, xs), reject(fn, xs)];
 
-const reduce = ([x, ...xs], fn, start) => def(x) ?
-	reduce(xs, fn, fn(x, start)) : start;
+// Probably current position indicator could be added, e.g. reduce(fn, start, i, arr)
+// and when passing arguments to fn - fn(x, start, i);
+const reduce = (fn, acc, [x, ...xs]) => def(x) ?
+	reduce(fn, fn(acc, x), xs) : acc;
 
 const factorial = (n, acc = 1) => n < 2 ? acc : factorial(n - 1, n * acc);
 
