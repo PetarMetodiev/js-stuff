@@ -34,6 +34,8 @@ const isArray = (x) => Array.isArray(x);
 const flatten = ([x, ...xs]) => def(x) ?
 	isArray(x) ? [...flatten(x), ...flatten(xs)] : [x, ...flatten(xs)] : [];
 
+// Probably current position indicator could be added, e.g. map(fn, i, arr)
+// and when passing arguments to fn - fn(x, i);
 const map = (fn, [x, ...xs]) => def(x) ? [fn(x), ...map(fn, xs)] : [];
 
 // https://www.reddit.com/r/javascript/comments/4ppifp/better_functional_way_to_swap_array_values/
