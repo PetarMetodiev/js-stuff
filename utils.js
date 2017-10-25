@@ -79,6 +79,8 @@ const partial = (fn, ...args) => (...newArgs) => fn(...args, ...newArgs);
 // Works only on recursive functions.
 const spreadArgs = (fn) => (...args) => fn(args);
 
+const reverseArgs = (fn) => (...args) => fn(...reverse(args));
+
 const factorial = (n, acc = 1) => n < 2 ? acc : factorial(n - 1, n * acc);
 
 const testArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -108,6 +110,7 @@ module.exports = {
 	, reduceRight
 	, partial
 	, spreadArgs
+	, reverseArgs
 	, factorial
 	, testArr
 };
