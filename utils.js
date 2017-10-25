@@ -65,6 +65,16 @@ const reduce = (fn, acc, [x, ...xs]) => def(x) ?
 
 const reduceRight = (fn, acc, arr) => reduce(fn, acc, reverse(arr));
 
+// Similar to curry but arguments can be applied during marking the function as partial.
+// If enough parameters are supplied, the function has to be executed explicitly to get a result
+// Does not return function until all arguments are provided.
+// E.g. a function add(x,y,z):
+// partial(add, 1,2,3)() <-- 3
+// partial((add)(1,2,3)) <-- 3
+// partial(add, 1,2)(3) <-- 3
+// partial(add)(1)(2)(3) <-- ERROR
+const partial = (fn, ...args) => (...newArgs) => fn(...args, ...newArgs);
+
 const factorial = (n, acc = 1) => n < 2 ? acc : factorial(n - 1, n * acc);
 
 const testArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -92,6 +102,7 @@ module.exports = {
 	, partition
 	, reduce
 	, reduceRight
+	, partial
 	, factorial
 	, testArr
 };
