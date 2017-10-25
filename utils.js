@@ -87,6 +87,9 @@ const pluck = (key, obj) => obj[key];
 // Alternative syntax with current functions.
 const flow = (...fns) => start => reduce((acc, fn) => fn(acc), start, fns);
 
+// Alternatie syntax to compose with current functions.
+const compose2 = (...fns) => flow(...reverse(fns));
+
 const factorial = (n, acc = 1) => n < 2 ? acc : factorial(n - 1, n * acc);
 
 const testArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -118,7 +121,8 @@ module.exports = {
 	, spreadArgs
 	, reverseArgs
 	, pluck
-	, pipe
+	, flow
+	, compose
 	, factorial
 	, testArr
 };
