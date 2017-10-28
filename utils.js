@@ -122,7 +122,7 @@ module.exports = {
 	, reverseArgs
 	, pluck
 	, flow
-	, compose
+	, compose2
 	, factorial
 	, testArr
 };
