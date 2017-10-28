@@ -90,6 +90,12 @@ const flow = (...fns) => start => reduce((acc, fn) => fn(acc), start, fns);
 // Alternatie syntax to compose with current functions.
 const compose2 = (...fns) => flow(...reverse(fns));
 
+const min = ([x, ...xs], result = Infinity) => def(x) ?
+	x > result ? min(xs, result) : min(xs, x) : result;
+
+const max = ([x, ...xs], result = -Infinity) => def(x) ?
+	x > result ? max(xs, x) : max(xs, result) : result;
+
 const factorial = (n, acc = 1) => n < 2 ? acc : factorial(n - 1, n * acc);
 
 const testArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -123,6 +129,8 @@ module.exports = {
 	, pluck
 	, flow
 	, compose2
+	, min
+	, max
 	, factorial
 	, testArr
 };
