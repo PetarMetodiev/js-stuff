@@ -24,7 +24,9 @@ const length = (arr) => (function _length(len, [x, ...xs]) {
 
 const reverse = ([x, ...xs]) => def(x) ? [...reverse(xs), x] : [];
 
-const first = (n = 1, [x, ...xs]) => def(x) && n > 0 ? [x, ...first(n - 1, xs)] : [];
+const first = (n, arr) => (function _first(n, [x, ...xs]) {
+	return def(x) && n > 0 ? [x, ..._first(n - 1, xs)] : [];
+})(n = n || 0, arr = arr || []);
 
 const last = (n = 1, xs) => reverse(first(reverse(xs), n));
 
