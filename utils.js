@@ -16,7 +16,7 @@ const def = (x) => typeof x !== 'undefined';
 const undef = (x) => !def(x);
 const copy = (arr) => [...arr];
 
-const length = (arr) => (function _length(len = 0, [x, ...xs]) {
+const length = (arr) => (function _length(len, [x, ...xs]) {
 	return def(x) ?
 		_length(len + 1, xs) :
 		len;
