@@ -16,9 +16,11 @@ const def = (x) => typeof x !== 'undefined';
 const undef = (x) => !def(x);
 const copy = (arr) => [...arr];
 
-const length = (len = 0, [x, ...xs]) => def(x) ?
-	length(len + 1, xs) :
-	len;
+const length = (arr) => (function _length(len = 0, [x, ...xs]) {
+	return def(x) ?
+		_length(len + 1, xs) :
+		len;
+})(0, arr = arr || []);
 
 const reverse = ([x, ...xs]) => def(x) ? [...reverse(xs), x] : [];
 
