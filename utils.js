@@ -28,7 +28,9 @@ const first = (n, arr) => (function _first(n, [x, ...xs]) {
 	return def(x) && n > 0 ? [x, ..._first(n - 1, xs)] : [];
 })(n = n || 0, arr = arr || []);
 
-const last = (n = 1, xs) => reverse(first(reverse(xs), n));
+const last = (n, arr) => (function _last(n, arr) {
+	return reverse(first(n, reverse(arr)));
+})(n = n || 1, arr = arr || []);
 
 const insertAt = (pos, el, curr = 0, [x, ...xs]) => def(x) ?
 	curr === pos ? [el, x, ...insertAt(pos, el, curr + 1, xs)] : [x, ...insertAt(pos, el, curr + 1, xs)] : curr <= pos ? [el] : [];
