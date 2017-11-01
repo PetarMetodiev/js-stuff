@@ -32,8 +32,10 @@ const last = (n, arr) => (function _last(n, arr) {
 	return reverse(first(n, reverse(arr)));
 })(n = n || 1, arr = arr || []);
 
-const insertAt = (pos, el, curr = 0, [x, ...xs]) => def(x) ?
-	curr === pos ? [el, x, ...insertAt(pos, el, curr + 1, xs)] : [x, ...insertAt(pos, el, curr + 1, xs)] : curr <= pos ? [el] : [];
+const insertAt = (pos, el, arr) => (function _insertAt(pos, el, curr, [x, ...xs]) {
+	return def(x) ?
+		curr === pos ? [el, x, ..._insertAt(pos, el, curr + 1, xs)] : [x, ..._insertAt(pos, el, curr + 1, xs)] : curr <= pos ? [el] : [];
+})(pos = pos || 0, el, 0, arr = arr || []);
 
 const isArray = (x) => Array.isArray(x);
 
