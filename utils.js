@@ -106,6 +106,12 @@ const max = ([x, ...xs], result = -Infinity) => def(x) ?
 
 const factorial = (n, acc = 1) => n < 2 ? acc : factorial(n - 1, n * acc);
 
+const quicksort = ([x, ...xs]) => def(x) ?
+	flatten([
+		quicksort(filter(n => n <= x, xs)),
+		x,
+		quicksort(filter(n => n > x, xs))
+	]) : [];
 
 module.exports = {
 	pipe
@@ -139,4 +145,5 @@ module.exports = {
 	, min
 	, max
 	, factorial
+	, quicksort
 };
