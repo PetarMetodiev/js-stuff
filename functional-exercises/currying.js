@@ -60,15 +60,23 @@ console.log(getQs('qwertyasdfgzxcvbazertyqazwsx'));
 // 	return x >= y ? x : y;
 // };
 
-const _keepHighest = (x,y) => x >= y ? x : y;
+const _keepHighest = (x, y) => x >= y ? x : y;
 
 // REFACTOR THIS ONE:
-var max = function (xs) {
-	return _.reduce(function (acc, x) {
-		return _keepHighest(acc, x);
-	}, -Infinity, xs);
-};
+// var max = function (xs) {
+// 	return _.reduce(function (acc, x) {
+// 		return _keepHighest(acc, x);
+// 	}, -Infinity, xs);
+// };
 
+const max = xs => _.reduce((acc, x) => _keepHighest(acc, x), -Infinity, xs);
+
+console.log('Ex3:');
+console.log(max([1, 2, 3, 4, 5, 4, 3, 2, 1, 11]));
+console.log(max([11, 2, 3, 4, 5, 4, 3, 2, 1, 11]));
+console.log(max([1, 22, 3, 4, 5, 4, 3, 2, 1, 11]));
+console.log(max([1, 1, 1, 1, 1, 1, 1, 1]));
+console.log(max([]));
 
 // Bonus 1:
 // ============
