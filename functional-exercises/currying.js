@@ -91,8 +91,15 @@ console.log(max2([]));
 // ============
 // Wrap array's slice to be functional and curried.
 // //[1, 2, 3].slice(0, 2)
-var slice = undefined;
 
+const slice = _.curry((start, end, xs) => xs.slice(start, end));
+
+console.log('Bonus 1:');
+console.log(slice(0, 2, [1, 2, 3]));
+console.log(slice(0)(2, [1, 2, 3]));
+console.log(slice(0, 2)([1, 2, 3]));
+console.log(slice(0)(2)([1, 2, 3]));
+console.log(slice()(0)(2)([1, 2, 3]));
 
 // Bonus 2:
 // ============
