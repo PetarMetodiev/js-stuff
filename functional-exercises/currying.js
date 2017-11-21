@@ -71,12 +71,21 @@ const _keepHighest = (x, y) => x >= y ? x : y;
 
 const max = xs => _.reduce((acc, x) => _keepHighest(acc, x), -Infinity, xs);
 
+const max2 = _.curry(xs => _.reduce(_keepHighest, -Infinity, xs));
+
 console.log('Ex3:');
 console.log(max([1, 2, 3, 4, 5, 4, 3, 2, 1, 11]));
 console.log(max([11, 2, 3, 4, 5, 4, 3, 2, 1, 11]));
 console.log(max([1, 22, 3, 4, 5, 4, 3, 2, 1, 11]));
 console.log(max([1, 1, 1, 1, 1, 1, 1, 1]));
 console.log(max([]));
+
+console.log('Ex3 solution:');
+console.log(max2([1, 2, 3, 4, 5, 4, 3, 2, 1, 11]));
+console.log(max2([11, 2, 3, 4, 5, 4, 3, 2, 1, 11]));
+console.log(max2([1, 22, 3, 4, 5, 4, 3, 2, 1, 11]));
+console.log(max2([1, 1, 1, 1, 1, 1, 1, 1]));
+console.log(max2([]));
 
 // Bonus 1:
 // ============
