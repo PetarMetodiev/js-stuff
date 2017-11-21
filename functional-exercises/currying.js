@@ -1,3 +1,4 @@
+
 var _ = require('ramda');
 
 // Exercise 1
@@ -8,11 +9,19 @@ var words = function (str) {
 	return _.split(' ', str);
 };
 
+const splitBySpace = _.split(' ');
+console.log(splitBySpace('aaa aaa aaa'));
+
 // Exercise 1a
 //==============
 // Use map to make a new words fn that works on an array of strings.
 
-var sentences = undefined;
+const sentences = _.map(splitBySpace);
+console.log(sentences([
+	'aaa aaa aaa',
+	'bbb bbb bbb',
+	'ccc ccc ccc'
+]));
 
 
 // Exercise 2
@@ -51,8 +60,10 @@ var max = function (xs) {
 var slice = undefined;
 
 
+
 // Bonus 2:
 // ============
 // Use slice to define a function "take" that returns n elements from the beginning of an array. Make it curried.
 // For ['a', 'b', 'c'] with n=2 it should return ['a', 'b'].
 var take = undefined;
+
