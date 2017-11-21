@@ -1,15 +1,18 @@
-
 var _ = require('ramda');
 
 // Exercise 1
 //==============
 // Refactor to remove all arguments by partially applying the function.
 
-var words = function (str) {
-	return _.split(' ', str);
-};
+// var words = function (str) {
+// 	return _.split(' ', str);
+// };
 
+const words = str => _.split(' ', str);
+
+// Ramda functions are curried by default.
 const splitBySpace = _.split(' ');
+console.log('Ex1:');
 console.log(splitBySpace('aaa aaa aaa'));
 
 // Exercise 1a
@@ -17,10 +20,11 @@ console.log(splitBySpace('aaa aaa aaa'));
 // Use map to make a new words fn that works on an array of strings.
 
 const sentences = _.map(splitBySpace);
+console.log('Ex1a:');
 console.log(sentences([
-	'aaa aaa aaa',
-	'bbb bbb bbb',
-	'ccc ccc ccc'
+	'aaa aaa aaa'
+	, 'bbb bbb bbb'
+	, 'ccc ccc ccc'
 ]));
 
 
