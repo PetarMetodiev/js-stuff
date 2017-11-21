@@ -1,0 +1,11 @@
+{
+  "name": "functional-exercises",
+  "version": "1.0.0",
+  "description": "Exercises on functional programming from the book Professor Frisby's mostly adequate guide to functional programming by drboolean",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Twick",
+  "license": "MIT"
+}
