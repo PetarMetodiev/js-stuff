@@ -32,12 +32,18 @@ console.log(sentences([
 //==============
 // Refactor to remove all arguments by partially applying the functions.
 
-var filterQs = function (xs) {
-	return _.filter(function (x) {
-		return match(/q/i, x);
-	}, xs);
-};
+const match = _.curry((what, str) => str.match(what));
 
+const filterQs = xs => _.filter(x => match(/q/i, x), xs);
+
+// var filterQs = function (xs) {
+// 	return _.filter(function (x) {
+// 		return match(/q/i, x);
+// 	}, xs);
+// };
+
+console.log('Ex3:');
+console.log(filterQs('qwertyasdfgzxcvbazertyqazwsx'));
 
 // Exercise 3
 //==============
@@ -64,10 +70,8 @@ var max = function (xs) {
 var slice = undefined;
 
 
-
 // Bonus 2:
 // ============
 // Use slice to define a function "take" that returns n elements from the beginning of an array. Make it curried.
 // For ['a', 'b', 'c'] with n=2 it should return ['a', 'b'].
 var take = undefined;
-
