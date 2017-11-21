@@ -42,8 +42,13 @@ const filterQs = xs => _.filter(x => match(/q/i, x), xs);
 // 	}, xs);
 // };
 
+const getQ = match(/q/i);
+const getAllQ = _.filter(getQ);
+const getQs = xs => getAllQ(xs);
+
 console.log('Ex3:');
 console.log(filterQs('qwertyasdfgzxcvbazertyqazwsx'));
+console.log(getQs('qwertyasdfgzxcvbazertyqazwsx'));
 
 // Exercise 3
 //==============
