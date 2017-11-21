@@ -1,4 +1,10 @@
-var _ = require('ramda');
+const _ = require('ramda');
+const title = msg => {
+	console.log('')
+	console.log('==================================================');
+	console.log(msg);
+	console.log('==================================================');
+}
 
 // Exercise 1
 //==============
@@ -12,7 +18,7 @@ const words = str => _.split(' ', str);
 
 // Ramda functions are curried by default.
 const splitBySpace = _.split(' ');
-console.log('Ex1:');
+title('Ex1:');
 console.log(splitBySpace('aaa aaa aaa'));
 
 // Exercise 1a
@@ -20,7 +26,7 @@ console.log(splitBySpace('aaa aaa aaa'));
 // Use map to make a new words fn that works on an array of strings.
 
 const sentences = _.map(splitBySpace);
-console.log('Ex1a:');
+title('Ex1a:');
 console.log(sentences([
 	'aaa aaa aaa'
 	, 'bbb bbb bbb'
@@ -46,7 +52,7 @@ const getQ = match(/q/i);
 const getAllQ = _.filter(getQ);
 const getQs = xs => getAllQ(xs);
 
-console.log('Ex3:');
+title('Ex3:');
 console.log(filterQs('qwertyasdfgzxcvbazertyqazwsx'));
 console.log(getQs('qwertyasdfgzxcvbazertyqazwsx'));
 
@@ -73,14 +79,14 @@ const max = xs => _.reduce((acc, x) => _keepHighest(acc, x), -Infinity, xs);
 
 const max2 = _.curry(xs => _.reduce(_keepHighest, -Infinity, xs));
 
-console.log('Ex3:');
+title('Ex3:');
 console.log(max([1, 2, 3, 4, 5, 4, 3, 2, 1, 11]));
 console.log(max([11, 2, 3, 4, 5, 4, 3, 2, 1, 11]));
 console.log(max([1, 22, 3, 4, 5, 4, 3, 2, 1, 11]));
 console.log(max([1, 1, 1, 1, 1, 1, 1, 1]));
 console.log(max([]));
 
-console.log('Ex3 solution:');
+title('Ex3 solution:');
 console.log(max2([1, 2, 3, 4, 5, 4, 3, 2, 1, 11]));
 console.log(max2([11, 2, 3, 4, 5, 4, 3, 2, 1, 11]));
 console.log(max2([1, 22, 3, 4, 5, 4, 3, 2, 1, 11]));
@@ -94,7 +100,7 @@ console.log(max2([]));
 
 const slice = _.curry((start, end, xs) => xs.slice(start, end));
 
-console.log('Bonus 1:');
+title('Bonus 1:');
 console.log(slice(0, 2, [1, 2, 3]));
 console.log(slice(0)(2, [1, 2, 3]));
 console.log(slice(0, 2)([1, 2, 3]));
@@ -107,7 +113,7 @@ console.log(slice()(0)(2)([1, 2, 3]));
 // For ['a', 'b', 'c'] with n=2 it should return ['a', 'b'].
 const take = slice(0);
 
-console.log('Bonus 2:');
+title('Bonus 2:');
 console.log(take(2, ['a', 'b', 'c']));
 console.log(take(2)(['a', 'b', 'c']));
 console.log(take()(2)(['a', 'b', 'c']));
