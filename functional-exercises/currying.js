@@ -105,4 +105,9 @@ console.log(slice()(0)(2)([1, 2, 3]));
 // ============
 // Use slice to define a function "take" that returns n elements from the beginning of an array. Make it curried.
 // For ['a', 'b', 'c'] with n=2 it should return ['a', 'b'].
-var take = undefined;
+const take = slice(0);
+
+console.log('Bonus 2:');
+console.log(take(2, ['a', 'b', 'c']));
+console.log(take(2)(['a', 'b', 'c']));
+console.log(take()(2)(['a', 'b', 'c']));
