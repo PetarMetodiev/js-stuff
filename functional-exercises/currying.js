@@ -1,4 +1,4 @@
-const _ = require('ramda');
+const { split, map, curry, filter, reduce } = require('ramda');
 const title = msg => {
 	console.log('')
 	console.log('==================================================');
@@ -14,10 +14,10 @@ const title = msg => {
 // 	return _.split(' ', str);
 // };
 
-const words = str => _.split(' ', str);
+const words = str => split(' ', str);
 
 // Ramda functions are curried by default.
-const splitBySpace = _.split(' ');
+const splitBySpace = split(' ');
 title('Ex1:');
 console.log(splitBySpace('aaa aaa aaa'));
 
@@ -25,7 +25,7 @@ console.log(splitBySpace('aaa aaa aaa'));
 //==============
 // Use map to make a new words fn that works on an array of strings.
 
-const sentences = _.map(splitBySpace);
+const sentences = map(splitBySpace);
 title('Ex1a:');
 console.log(sentences([
 	'aaa aaa aaa'
@@ -38,9 +38,9 @@ console.log(sentences([
 //==============
 // Refactor to remove all arguments by partially applying the functions.
 
-const match = _.curry((what, str) => str.match(what));
+const match = curry((what, str) => str.match(what));
 
-const filterQs = xs => _.filter(x => match(/q/i, x), xs);
+const filterQs = xs => filter(x => match(/q/i, x), xs);
 
 // var filterQs = function (xs) {
 // 	return _.filter(function (x) {
@@ -49,7 +49,7 @@ const filterQs = xs => _.filter(x => match(/q/i, x), xs);
 // };
 
 const getQ = match(/q/i);
-const getAllQ = _.filter(getQ);
+const getAllQ = filter(getQ);
 const getQs = xs => getAllQ(xs);
 
 title('Ex3:');
@@ -75,9 +75,9 @@ const _keepHighest = (x, y) => x >= y ? x : y;
 // 	}, -Infinity, xs);
 // };
 
-const max = xs => _.reduce((acc, x) => _keepHighest(acc, x), -Infinity, xs);
+const max = xs => reduce((acc, x) => _keepHighest(acc, x), -Infinity, xs);
 
-const max2 = _.curry(xs => _.reduce(_keepHighest, -Infinity, xs));
+const max2 = curry(xs => reduce(_keepHighest, -Infinity, xs));
 
 title('Ex3:');
 console.log(max([1, 2, 3, 4, 5, 4, 3, 2, 1, 11]));
@@ -98,7 +98,7 @@ console.log(max2([]));
 // Wrap array's slice to be functional and curried.
 // //[1, 2, 3].slice(0, 2)
 
-const slice = _.curry((start, end, xs) => xs.slice(start, end));
+const slice = curry((start, end, xs) => xs.slice(start, end));
 
 title('Bonus 1:');
 console.log(slice(0, 2, [1, 2, 3]));
