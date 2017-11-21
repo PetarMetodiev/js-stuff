@@ -56,9 +56,11 @@ console.log(getQs('qwertyasdfgzxcvbazertyqazwsx'));
 // arguments.
 
 // LEAVE BE:
-var _keepHighest = function (x, y) {
-	return x >= y ? x : y;
-};
+// var _keepHighest = function (x, y) {
+// 	return x >= y ? x : y;
+// };
+
+const _keepHighest = (x,y) => x >= y ? x : y;
 
 // REFACTOR THIS ONE:
 var max = function (xs) {
