@@ -9,6 +9,7 @@
   "author": "Twick",
   "license": "MIT",
   "dependencies": {
+    "accounting": "^0.4.1",
     "ramda": "^0.25.0"
   }
 }
