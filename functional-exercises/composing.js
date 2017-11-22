@@ -181,9 +181,9 @@ const availablePrices2 = _.pipe(
 const getFormattedValue = _.pipe(_.prop('dollar_value'), accounting.formatMoney);
 
 const availablePrices3 = _.pipe(
-	_.filter(_.prop('in_stock')),
-	_.map(getFormattedValue),
-	_.join(', ')
+	_.filter(_.prop('in_stock'))
+	, _.map(getFormattedValue)
+	, _.join(', ')
 );
 
 title('Bonus1:')
