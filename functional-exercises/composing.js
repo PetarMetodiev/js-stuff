@@ -1,8 +1,8 @@
-var _ = require('ramda');
-var accounting = require('accounting');
+const _ = require('ramda');
+const accounting = require('accounting');
 
 // Example Data
-var CARS = [{
+const CARS = [{
 	name: 'Ferrari FF'
 	, horsepower: 660
 	, dollar_value: 700000
