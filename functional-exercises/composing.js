@@ -91,13 +91,13 @@ const averageDollarValue = cars => {
 }
 
 const averageDollarValue2 = _.pipe(
-	_.map(_.prop('dollar_value')),
-	_average
+	_.map(_.prop('dollar_value'))
+	, _average
 );
 
 const averageDollarValue3 = _.compose(
-	_average,
-	_.map(_.prop('dollar_value'))
+	_average
+	, _.map(_.prop('dollar_value'))
 );
 
 title('Ex3:')
