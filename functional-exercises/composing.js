@@ -114,8 +114,44 @@ console.log(averageDollarValue3(CARS));
 
 const _underscore = _.replace(/\W+/g, '_'); //<-- leave this alone and use to sanitize
 
-var sanitizeNames = undefined;
+const sanitizeNames = _.pipe(
+	_.map(_.prop('name'))
+	, _.map(_.toLower)
+	, _.map(_underscore)
+);
 
+const sanitizeNames2 = _.compose(
+	_.map(_underscore)
+	, _.map(_.toLower)
+	, _.map(_.prop('name'))
+);
+
+const trace = msg => x => {
+	console.log(msg, x);
+	return x;
+}
+
+const sanitizeOneName = _.compose(
+	_.toLower
+	, _underscore
+	, _.prop('name')
+);
+
+const sanitizeNames3 = _.map(sanitizeOneName);
+
+const sanitizeOneName2 = _.pipe(
+	_.prop('name')
+	, _.toLower
+	, _underscore
+);
+
+const sanitizeNames4 = _.map(sanitizeOneName2);
+
+title('Ex4:');
+console.log(sanitizeNames(CARS));
+console.log(sanitizeNames2(CARS));
+console.log(sanitizeNames3(CARS));
+console.log(sanitizeNames4(CARS));
 
 // Bonus 1:
 // ============
