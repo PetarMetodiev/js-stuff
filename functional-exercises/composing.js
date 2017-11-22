@@ -208,3 +208,14 @@ const fastestCar = cars => {
 	const fastest = _.last(sorted);
 	return `${fastest.name} is the fastest`;
 };
+
+const fastestCar2 = _.pipe(
+	_.sortBy(_.prop('horsepower')),
+	_.last,
+	_.prop('name'),
+	_.flip(_.concat)(' is the fastest')
+);
+
+title('Bonus2:')
+console.log(fastestCar(CARS));
+console.log(fastestCar2(CARS));
