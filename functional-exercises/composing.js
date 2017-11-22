@@ -210,10 +210,10 @@ const fastestCar = cars => {
 };
 
 const fastestCar2 = _.pipe(
-	_.sortBy(_.prop('horsepower')),
-	_.last,
-	_.prop('name'),
-	_.flip(_.concat)(' is the fastest')
+	_.sortBy(_.prop('horsepower'))
+	, _.last
+	, _.prop('name')
+	, _.flip(_.concat)(' is the fastest')
 );
 
 title('Bonus2:')
