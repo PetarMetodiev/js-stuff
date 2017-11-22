@@ -88,7 +88,24 @@ const _average = xs => _.reduce(_.add, 0, xs) / xs.length;
 const averageDollarValue = cars => {
 	const dollar_values = _.map(c => c.dollar_value, cars);
 	return _average(dollar_values);
-};
+}
+
+const averageDollarValue2 = _.pipe(
+	_.map(_.prop('dollar_value')),
+	_average
+);
+
+const averageDollarValue3 = _.compose(
+	_average,
+	_.map(_.prop('dollar_value'))
+);
+
+title('Ex3:')
+console.log(averageDollarValue(CARS));
+
+title('Ex3 solution:');
+console.log(averageDollarValue2(CARS));
+console.log(averageDollarValue3(CARS));
 
 
 // Exercise 4:
