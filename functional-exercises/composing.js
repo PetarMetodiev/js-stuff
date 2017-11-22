@@ -195,10 +195,16 @@ console.log(availablePrices3(CARS));
 // ============
 // Refactor to pointfree. Hint: you can use _.flip().
 
-var fastestCar = function (cars) {
-	var sorted = _.sortBy(function (car) {
-		return car.horsepower;
-	}, cars);
-	var fastest = _.last(sorted);
-	return fastest.name + ' is the fastest';
+// var fastestCar = function (cars) {
+// 	var sorted = _.sortBy(function (car) {
+// 		return car.horsepower;
+// 	}, cars);
+// 	var fastest = _.last(sorted);
+// 	return fastest.name + ' is the fastest';
+// };
+
+const fastestCar = cars => {
+	const sorted = _.sortBy(car => car.horsepower, cars);
+	const fastest = _.last(sorted);
+	return `${fastest.name} is the fastest`;
 };
