@@ -1,5 +1,21 @@
-const _ = require('ramda');
-const accounting = require('accounting');
+const {
+	compose
+	, last
+	, prop
+	, head
+	, reduce
+	, add
+	, map
+	, pipe
+	, replace
+	, toLower
+	, filter
+	, join
+	, sortBy
+	, flip
+	, concat
+} = require('ramda');
+const { formatMoney } = require('accounting');
 const title = msg => {
 	console.log('')
 	console.log('==================================================');
@@ -42,18 +58,18 @@ const CARS = [{
 
 // Exercise 1:
 // ============
-// Use _.compose() to rewrite the function below. Hint: _.prop() is curried.
+// Use compose() to rewrite the function below. Hint: prop() is curried.
 // var isLastInStock = function (cars) {
-// 	var last_car = _.last(cars);
-// 	return _.prop('in_stock', last_car);
+// 	var last_car = last(cars);
+// 	return prop('in_stock', last_car);
 // };
 
 const isLastInStock = cars => {
-	const lastCar = _.last(cars);
-	return _.prop('in_stock', lastCar);
+	const lastCar = last(cars);
+	return prop('in_stock', lastCar);
 }
 
-const isLastInStock2 = _.compose(_.prop('in_stock'), _.last);
+const isLastInStock2 = compose(prop('in_stock'), last);
 
 title('Ex1:');
 console.log(isLastInStock(CARS));
@@ -63,8 +79,8 @@ console.log(isLastInStock2(CARS));
 
 // Exercise 2:
 // ============
-// Use _.compose(), _.prop() and _.head() to retrieve the name of the first car.
-const nameOfFirstCar = _.compose(_.prop('name'), _.head);
+// Use compose(), prop() and head() to retrieve the name of the first car.
+const nameOfFirstCar = compose(prop('name'), head);
 
 title('Ex2:')
 console.log(nameOfFirstCar(CARS));
@@ -73,31 +89,31 @@ console.log(nameOfFirstCar(CARS));
 // ============
 // Use the helper function _average to refactor averageDollarValue as a composition.
 // var _average = function (xs) {
-// 	return _.reduce(_.add, 0, xs) / xs.length;
+// 	return reduce(add, 0, xs) / xs.length;
 // }; // <- leave be
 
-const _average = xs => _.reduce(_.add, 0, xs) / xs.length;
+const _average = xs => reduce(add, 0, xs) / xs.length;
 
 // var averageDollarValue = function (cars) {
-// 	var dollar_values = _.map(function (c) {
+// 	var dollar_values = map(function (c) {
 // 		return c.dollar_value;
 // 	}, cars);
 // 	return _average(dollar_values);
 // };
 
 const averageDollarValue = cars => {
-	const dollar_values = _.map(c => c.dollar_value, cars);
+	const dollar_values = map(c => c.dollar_value, cars);
 	return _average(dollar_values);
 }
 
-const averageDollarValue2 = _.pipe(
-	_.map(_.prop('dollar_value'))
+const averageDollarValue2 = pipe(
+	map(prop('dollar_value'))
 	, _average
 );
 
-const averageDollarValue3 = _.compose(
+const averageDollarValue3 = compose(
 	_average
-	, _.map(_.prop('dollar_value'))
+	, map(prop('dollar_value'))
 );
 
 title('Ex3:')
@@ -112,18 +128,18 @@ console.log(averageDollarValue3(CARS));
 // ============
 // Write a function: sanitizeNames() using compose that returns a list of lowercase and underscored car's names: e.g: sanitizeNames([{name: 'Ferrari FF', horsepower: 660, dollar_value: 700000, in_stock: true}]) //=> ['ferrari_ff'].
 
-const _underscore = _.replace(/\W+/g, '_'); //<-- leave this alone and use to sanitize
+const _underscore = replace(/\W+/g, '_'); //<-- leave this alone and use to sanitize
 
-const sanitizeNames = _.pipe(
-	_.map(_.prop('name'))
-	, _.map(_.toLower)
-	, _.map(_underscore)
+const sanitizeNames = pipe(
+	map(prop('name'))
+	, map(toLower)
+	, map(_underscore)
 );
 
-const sanitizeNames2 = _.compose(
-	_.map(_underscore)
-	, _.map(_.toLower)
-	, _.map(_.prop('name'))
+const sanitizeNames2 = compose(
+	map(_underscore)
+	, map(toLower)
+	, map(prop('name'))
 );
 
 const trace = msg => x => {
@@ -131,21 +147,21 @@ const trace = msg => x => {
 	return x;
 }
 
-const sanitizeOneName = _.compose(
-	_.toLower
+const sanitizeOneName = compose(
+	toLower
 	, _underscore
-	, _.prop('name')
+	, prop('name')
 );
 
-const sanitizeNames3 = _.map(sanitizeOneName);
+const sanitizeNames3 = map(sanitizeOneName);
 
-const sanitizeOneName2 = _.pipe(
-	_.prop('name')
-	, _.toLower
+const sanitizeOneName2 = pipe(
+	prop('name')
+	, toLower
 	, _underscore
 );
 
-const sanitizeNames4 = _.map(sanitizeOneName2);
+const sanitizeNames4 = map(sanitizeOneName2);
 
 title('Ex4:');
 console.log(sanitizeNames(CARS));
@@ -158,32 +174,32 @@ console.log(sanitizeNames4(CARS));
 // Refactor availablePrices with compose.
 
 // var availablePrices = function (cars) {
-// 	var available_cars = _.filter(_.prop('in_stock'), cars);
+// 	var available_cars = filter(prop('in_stock'), cars);
 // 	return available_cars.map(function (x) {
-// 			return accounting.formatMoney(x.dollar_value);
+// 			return formatMoney(x.dollar_value);
 // 		})
 // 		.join(', ');
 // };
 
 const availablePrices = cars => {
-	const availableCars = _.filter(_.prop('in_stock'), cars);
-	return availableCars.map(x => accounting.formatMoney(x.dollar_value))
+	const availableCars = filter(prop('in_stock'), cars);
+	return availableCars.map(x => formatMoney(x.dollar_value))
 		.join(', ');
 };
 
-const availablePrices2 = _.pipe(
-	_.filter(_.prop('in_stock'))
-	, _.map(_.prop('dollar_value'))
-	, _.map(accounting.formatMoney)
-	, _.join(', ')
+const availablePrices2 = pipe(
+	filter(prop('in_stock'))
+	, map(prop('dollar_value'))
+	, map(formatMoney)
+	, join(', ')
 );
 
-const getFormattedValue = _.pipe(_.prop('dollar_value'), accounting.formatMoney);
+const getFormattedValue = pipe(prop('dollar_value'), formatMoney);
 
-const availablePrices3 = _.pipe(
-	_.filter(_.prop('in_stock'))
-	, _.map(getFormattedValue)
-	, _.join(', ')
+const availablePrices3 = pipe(
+	filter(prop('in_stock'))
+	, map(getFormattedValue)
+	, join(', ')
 );
 
 title('Bonus1:')
@@ -193,27 +209,27 @@ console.log(availablePrices3(CARS));
 
 // Bonus 2:
 // ============
-// Refactor to pointfree. Hint: you can use _.flip().
+// Refactor to pointfree. Hint: you can use flip().
 
 // var fastestCar = function (cars) {
-// 	var sorted = _.sortBy(function (car) {
+// 	var sorted = sortBy(function (car) {
 // 		return car.horsepower;
 // 	}, cars);
-// 	var fastest = _.last(sorted);
+// 	var fastest = last(sorted);
 // 	return fastest.name + ' is the fastest';
 // };
 
 const fastestCar = cars => {
-	const sorted = _.sortBy(car => car.horsepower, cars);
-	const fastest = _.last(sorted);
+	const sorted = sortBy(car => car.horsepower, cars);
+	const fastest = last(sorted);
 	return `${fastest.name} is the fastest`;
 };
 
-const fastestCar2 = _.pipe(
-	_.sortBy(_.prop('horsepower'))
-	, _.last
-	, _.prop('name')
-	, _.flip(_.concat)(' is the fastest')
+const fastestCar2 = pipe(
+	sortBy(prop('horsepower'))
+	, last
+	, prop('name')
+	, flip(concat)(' is the fastest')
 );
 
 title('Bonus2:')
