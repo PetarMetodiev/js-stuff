@@ -52,7 +52,7 @@ const getQ = match(/q/i);
 const getAllQ = filter(getQ);
 const getQs = xs => getAllQ(xs);
 
-title('Ex3:');
+title('Ex2:');
 console.log(filterQs('qwertyasdfgzxcvbazertyqazwsx'));
 console.log(getQs('qwertyasdfgzxcvbazertyqazwsx'));
 
