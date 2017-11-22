@@ -69,18 +69,24 @@ const nameOfFirstCar = _.compose(_.prop('name'), _.head);
 title('Ex2:')
 console.log(nameOfFirstCar(CARS));
 
-
 // Exercise 3:
 // ============
 // Use the helper function _average to refactor averageDollarValue as a composition.
-var _average = function (xs) {
-	return _.reduce(_.add, 0, xs) / xs.length;
-}; // <- leave be
+// var _average = function (xs) {
+// 	return _.reduce(_.add, 0, xs) / xs.length;
+// }; // <- leave be
 
-var averageDollarValue = function (cars) {
-	var dollar_values = _.map(function (c) {
-		return c.dollar_value;
-	}, cars);
+const _average = xs => _.reduce(_.add, 0, xs) / xs.length;
+
+// var averageDollarValue = function (cars) {
+// 	var dollar_values = _.map(function (c) {
+// 		return c.dollar_value;
+// 	}, cars);
+// 	return _average(dollar_values);
+// };
+
+const averageDollarValue = cars => {
+	const dollar_values = _.map(c => c.dollar_value, cars);
 	return _average(dollar_values);
 };
 
