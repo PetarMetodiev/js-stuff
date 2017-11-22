@@ -1,5 +1,11 @@
 const _ = require('ramda');
 const accounting = require('accounting');
+const title = msg => {
+	console.log('')
+	console.log('==================================================');
+	console.log(msg);
+	console.log('==================================================');
+}
 
 // Example Data
 const CARS = [{
