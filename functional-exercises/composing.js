@@ -157,11 +157,17 @@ console.log(sanitizeNames4(CARS));
 // ============
 // Refactor availablePrices with compose.
 
-var availablePrices = function (cars) {
-	var available_cars = _.filter(_.prop('in_stock'), cars);
-	return available_cars.map(function (x) {
-			return accounting.formatMoney(x.dollar_value);
-		})
+// var availablePrices = function (cars) {
+// 	var available_cars = _.filter(_.prop('in_stock'), cars);
+// 	return available_cars.map(function (x) {
+// 			return accounting.formatMoney(x.dollar_value);
+// 		})
+// 		.join(', ');
+// };
+
+const availablePrices = cars => {
+	const availableCars = _.filter(_.prop('in_stock'), cars);
+	return availableCars.map(x => accounting.formatMoney(x.dollar_value))
 		.join(', ');
 };
 
