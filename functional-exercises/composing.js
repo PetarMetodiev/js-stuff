@@ -171,6 +171,25 @@ const availablePrices = cars => {
 		.join(', ');
 };
 
+const availablePrices2 = _.pipe(
+	_.filter(_.prop('in_stock'))
+	, _.map(_.prop('dollar_value'))
+	, _.map(accounting.formatMoney)
+	, _.join(', ')
+);
+
+const getFormattedValue = _.pipe(_.prop('dollar_value'), accounting.formatMoney);
+
+const availablePrices3 = _.pipe(
+	_.filter(_.prop('in_stock')),
+	_.map(getFormattedValue),
+	_.join(', ')
+);
+
+title('Bonus1:')
+console.log(availablePrices(CARS));
+console.log(availablePrices2(CARS));
+console.log(availablePrices3(CARS));
 
 // Bonus 2:
 // ============
