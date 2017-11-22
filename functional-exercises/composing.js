@@ -34,7 +34,6 @@ var CARS = [{
 	, in_stock: false
 , }];
 
-
 // Exercise 1:
 // ============
 // Use _.compose() to rewrite the function below. Hint: _.prop() is curried.
