@@ -53,6 +53,14 @@ const isLastInStock = cars => {
 	return _.prop('in_stock', lastCar);
 }
 
+const isLastInStock2 = _.compose(_.prop('in_stock'), _.last);
+
+title('Ex1:');
+console.log(isLastInStock(CARS));
+
+title('Ex1 solution:')
+console.log(isLastInStock2(CARS));
+
 // Exercise 2:
 // ============
 // Use _.compose(), _.prop() and _.head() to retrieve the name of the first car.
