@@ -11,6 +11,8 @@ const curry = (fx, arity = 0) =>
 
 const head = ([x]) => x;
 const tail = ([, ...xs]) => xs;
+const last = (xs) => pipe(reverse, head)(xs);
+const init = (xs) => pipe(reverse, tail, reverse)(xs);
 // https://medium.com/@caseymorrisus/functional-js-with-es6-recursive-patterns-b7d0813ef9e3
 const def = (x) => typeof x !== 'undefined';
 const undef = (x) => !def(x);
@@ -119,6 +121,8 @@ module.exports = {
 	, curry
 	, head
 	, tail
+	, last
+	, init
 	, def
 	, undef
 	, copy
