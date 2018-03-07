@@ -7,7 +7,7 @@ Container.of = function (x) {
 	return new Container(x);
 }
 
-Container.prototype.map = function(xf) {
+Container.prototype.map = function (xf) {
 	return Container.of(xf(this.__value));
 }
 
