@@ -24,12 +24,12 @@ const length = (arr) => (function _length(len, [x, ...xs]) {
 
 const reverse = ([x, ...xs]) => def(x) ? [...reverse(xs), x] : [];
 
-const first = (n, arr) => (function _first(n, [x, ...xs]) {
-	return def(x) && n > 0 ? [x, ..._first(n - 1, xs)] : [];
+const take = (n, arr) => (function _take(n, [x, ...xs]) {
+	return def(x) && n > 0 ? [x, ..._take(n - 1, xs)] : [];
 })(n = n || 0, arr = arr || []);
 
-const last = (n, arr) => (function _last(n, arr) {
-	return reverse(first(n, reverse(arr)));
+const drop = (n, arr) => (function _drop(n, arr) {
+	return reverse(take(n, reverse(arr)));
 })(n = n || 1, arr = arr || []);
 
 const insertAt = (pos, el, arr) => (function _insertAt(pos, el, curr, [x, ...xs]) {
@@ -124,8 +124,8 @@ module.exports = {
 	, copy
 	, length
 	, reverse
-	, first
-	, last
+	, take
+	, drop
 	, insertAt
 	, isArray
 	, flatten
