@@ -26,6 +26,9 @@ Maybe.prototype.isNothing = function () {
 Maybe.prototype.map = function (xf) {
 	return this.isNothing() ? Maybe.of(null) : Maybe.of(xf(this.__value));
 }
+
+const safeHead = xs => Maybe.of(xs[0]);
+
 module.exports = {
 	Container,
 	Maybe
